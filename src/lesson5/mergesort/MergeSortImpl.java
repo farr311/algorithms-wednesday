@@ -1,11 +1,19 @@
 package lesson5.mergesort;
 
+import java.util.Arrays;
+
 public class MergeSortImpl {
 
     public static void main(String[] args) {
         int[] arr = new int[] { 2, 6, 87, 1, 0, 52, 42, 41, 1, 5, 7 };
 
         mergeSort(arr, 0, arr.length - 1);
+
+        System.out.println(Arrays.toString(arr));
+    }
+
+    static void mergeSortIterative(int[] arr) {
+
     }
 
     static void mergeSort(int[] arr, int left, int right) {
@@ -27,7 +35,7 @@ public class MergeSortImpl {
         int[] arrR = new int[ind2];
 
         for (int i = 0; i < ind1; i++) {
-            arrL[i] = arr[i + 1];
+            arrL[i] = arr[i + left];
         }
 
         for (int i = 0; i < ind2; i++) {
@@ -36,21 +44,33 @@ public class MergeSortImpl {
 
         int i = 0;
         int j = 0;
-        int k = 0;
+        int k = left;
 
         // Сортируем 2 массива между собой
         while (i < ind1 && j < ind2) {
+            if (arrL[i] <= arrR[j]) {
+                arr[k] = arrL[i];
+                i++;
+            } else {
+                arr[k] = arrR[j];
+                j++;
+            }
 
+            k++;
         }
 
         // Копируем оставшиеся элементы из arrL, если они есть
         while (i < ind1) {
-
+            arr[k] = arrL[i];
+            i++;
+            k++;
         }
 
         // Копируем оставшиеся элементы из arrR, если они есть
         while (j < ind2) {
-
+            arr[k] = arrR[j];
+            j++;
+            k++;
         }
     }
 }
