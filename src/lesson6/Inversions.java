@@ -14,7 +14,7 @@ public class Inversions {
         int[] arr = new int[] {1, 9, 6, 4, 5};
         System.out.println(quadraticInversions(arr));
 
-
+        Arrays.sort()
 
         System.out.println(linearLogInversions(arr, Arrays.copyOf(arr, arr.length), 0, arr.length - 1));
     }
