@@ -10,8 +10,6 @@ public interface Dynamic {
 
     void removeAt(int index);
 
-    void growSize();
-
     void shrinkSize();
 
     void set(int index, int value);
