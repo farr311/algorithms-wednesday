@@ -14,7 +14,6 @@ public class Inversions {
         int[] arr = new int[] {1, 9, 6, 4, 5};
         System.out.println(quadraticInversions(arr));
 
-        Arrays.sort()
 
         System.out.println(linearLogInversions(arr, Arrays.copyOf(arr, arr.length), 0, arr.length - 1));
     }
@@ -51,7 +50,7 @@ public class Inversions {
         }
     }
 
-    static void merge(int[] arr, int[] copy, int left, int middle, int right) {
+    static void merge(int[] arr, int left, int middle, int right) {
         int ind1 = middle - left + 1;
         int ind2 = right - middle;
 
@@ -65,7 +64,7 @@ public class Inversions {
         for (int i = 0; i < ind2; i++) {
             arrR[i] = arr[middle + 1 + i];
         }*/
-
+/*
         int i = 0;
         int j = 0;
         int k = left;
@@ -95,7 +94,7 @@ public class Inversions {
             copy[k] = arr[j];
             j++;
             k++;
-        }
+        }*/
     }
 
 

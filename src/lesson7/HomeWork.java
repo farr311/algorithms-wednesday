@@ -1,5 +1,6 @@
 package lesson7;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class HomeWork {
@@ -9,15 +10,29 @@ public class HomeWork {
         mergeSort(arr);
 
         System.out.println(Arrays.toString(arr));
+
+        ArrayList list = new ArrayList();
+        list.add(1);
+        list.add("test");
+        list.add(new Object());
+        list.add(false);
+        System.out.println(list);
+
+        boolean isInt = list.get(0) instanceof Integer;
+        boolean isSnt = list.get(1) instanceof String;
+
+        System.out.println(isInt);
+        System.out.println(isSnt);
     }
     static void mergeSort(int[] arr) {
         int length = arr.length;
 
         for (int size = 1; size <= length - 1; size = size * 2) {
-            for (int left = 1; left < length - 1; left += size * 2) {
-                //...
+            for (int left = 0; left < length - 1; left += size * 2) {
+                int middle = Math.min(left + size - 1, length - 1);
+                int right = Math.min(left + size * 2 - 1, length - 1);
 
-                merge(arr, ...);
+                merge(arr, left, middle, right);
             }
         }
     }
