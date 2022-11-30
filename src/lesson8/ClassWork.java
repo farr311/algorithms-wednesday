@@ -18,6 +18,8 @@ public class ClassWork {
         insertFirstElement(arr,3);
         insertFirstElement(arr,2);
         insertFirstElement(arr,1);
+
+        System.out.println(Arrays.toString(arr));
     }
 
     private static void insertFirstElement(int[] arr, int e) {
@@ -27,5 +29,15 @@ public class ClassWork {
         * Написать метод, который вставляет переданное значение на 0 позицию в переданный массив
         * Вызвать этот метод 10 раз
         */
+
+        for (int i = arr.length - 1; i >= 1; i--) {
+            if (arr[i - 1] == 0) {
+                continue;
+            }
+
+            arr[i] = arr[i - 1];
+        }
+
+        arr[0] = e;
     }
 }
