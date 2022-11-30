@@ -6,11 +6,20 @@ public class DynamicArray {
     int[] arr = new int[0];
 
     public void add(int e) {
-        // При добавлении каждого элемента увеличить размер массива на 1
+        int[] tmp = new int[arr.length + 1];
+        for (int i = 0; i < arr.length; i++) {
+            tmp[i] = arr[i];
+        }
+        tmp[tmp.length - 1] = e;
+        arr = tmp;
     }
 
     public void remove() {
-        // При удалении каждого элемента уменьшить размер массива на 1
+        int[] tmp = new int[arr.length - 1];
+        for (int i = 0; i < arr.length - 1; i++) {
+            tmp[i] = arr[i];
+        }
+        arr = tmp;
     }
 
     public void print() {
