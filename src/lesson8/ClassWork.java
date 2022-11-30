@@ -23,19 +23,21 @@ public class ClassWork {
     }
 
     private static void insertFirstElement(int[] arr, int e) {
-        /*
-        *TODO:
-        * Создать массив на 10 элементов,
-        * Написать метод, который вставляет переданное значение на 0 позицию в переданный массив
-        * Вызвать этот метод 10 раз
-        */
-
-        for (int i = arr.length - 1; i >= 1; i--) {
+       /* for (int i = arr.length - 1; i >= 1; i--) {
             if (arr[i - 1] == 0) {
                 continue;
             }
 
             arr[i] = arr[i - 1];
+        }*/
+
+        int s = arr[0];
+        int tmp;
+
+        for (int i = 1; i < arr.length; i++) {
+            tmp = arr[i];
+            arr[i] = s;
+            s = tmp;
         }
 
         arr[0] = e;
