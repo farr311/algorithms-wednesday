@@ -6,7 +6,7 @@ public class DynamicArray implements Dynamic {
 
 
     public DynamicArray() {
-        array = new int[...];
+        //array = new int[...];
     }
 
     // Конструктор с заданным начальным размером массива
