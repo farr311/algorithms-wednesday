@@ -35,17 +35,40 @@ public class CustomLinkedList implements CustomList {
 
     @Override
     public void pushToIndex(int index, int data) {
+        if (index == 0) {
+            pushToHead(data);
+        } else if (index == size) {
+            pushToTail(data);
+        } else {
+            Node prevNode = getElement(index - 1);
+            Node currentNode = new Node(data, getElement(index - 1).getNext());
+            prevNode.setNext(currentNode);
 
+            size++;
+        }
     }
 
     @Override
     public void removeFirst() {
+        head = head.getNext();
 
+        if (size == 1) {
+            tail = null;
+        }
+
+        size--;
     }
 
     @Override
     public void removeLast() {
-
+        if (size == 1) {
+            head = null;
+            tail = null;
+        } else {
+            Node prev = getElement(size - 2);
+            prev.setNext(null);
+        }
+        size--;
     }
 
     @Override
@@ -55,21 +78,7 @@ public class CustomLinkedList implements CustomList {
 
     @Override
     public int get(int index) {
-        Node currentNode = null;
-
-        for (int i = 0; i <= index; i++) {
-            if (i == 0) {
-                currentNode = head;
-            } else if (currentNode != null) {
-                currentNode = currentNode.getNext();
-            }
-        }
-
-        if (currentNode == null) {
-            throw new RuntimeException();
-        }
-
-        return currentNode.getValue();
+        return getElement(index).getValue();
     }
 
     @Override
@@ -93,6 +102,24 @@ public class CustomLinkedList implements CustomList {
     @Override
     public void print() {
 
+    }
+
+    private Node getElement(int index) {
+        Node currentNode = null;
+
+        for (int i = 0; i <= index; i++) {
+            if (i == 0) {
+                currentNode = head;
+            } else if (currentNode != null) {
+                currentNode = currentNode.getNext();
+            }
+        }
+
+        if (currentNode == null) {
+            throw new RuntimeException();
+        }
+
+        return currentNode;
     }
 
     private static class Node {
