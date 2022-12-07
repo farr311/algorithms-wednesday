@@ -41,7 +41,7 @@ public class CustomLinkedList implements CustomList {
             pushToTail(data);
         } else {
             Node prevNode = getElement(index - 1);
-            Node currentNode = new Node(data, getElement(index - 1).getNext());
+            Node currentNode = new Node(data, prevNode.getNext());
             prevNode.setNext(currentNode);
 
             size++;
@@ -73,13 +73,20 @@ public class CustomLinkedList implements CustomList {
 
     @Override
     public void remove(int index) {
+        if (index == 0) {
+            removeFirst();
+        } else if (index == size - 1) {
+            removeLast();
+        } else {
+            Node prevNode = getElement(index - 1);
+            prevNode.setNext(prevNode.getNext().getNext());
 
+            size--;
+        }
     }
 
     @Override
-    public int get(int index) {
-        return getElement(index).getValue();
-    }
+    public int get(int index) { return getElement(index).getValue(); }
 
     @Override
     public void clear() {
@@ -87,9 +94,7 @@ public class CustomLinkedList implements CustomList {
     }
 
     @Override
-    public void set(int index, int data) {
-
-    }
+    public void set(int index, int data) { getElement(index).setValue(data); }
 
     @Override
     public boolean contains(int data) {
@@ -101,7 +106,7 @@ public class CustomLinkedList implements CustomList {
 
     @Override
     public void print() {
-
+        //Вывод в консоль значений в формате [1, 2, 3, 4, 5, 6]
     }
 
     private Node getElement(int index) {
