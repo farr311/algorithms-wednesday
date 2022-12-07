@@ -1,5 +1,7 @@
 package lesson7.dynamicarray;
 
+import java.util.Arrays;
+
 public class DynamicArray implements Dynamic {
 
     private int[] array;
@@ -27,7 +29,7 @@ public class DynamicArray implements Dynamic {
         if (size >= capacity) {
             growSize(-1);
         }
-        array[++size] = value;
+        array[size++] = value;
     }
 
     // Добавление элемента по индексу
@@ -35,8 +37,13 @@ public class DynamicArray implements Dynamic {
     public void addAt(int index, int value) {
         if (size >= capacity) {
             growSize(index);
+        } else {
+            for (int i = size - 1; i >= index; i--) {
+                array[i + 1] = array[i];
+            }
         }
-        array[++size] = value;
+        array[index] = value;
+        size++;
     }
 
     // Удаление последнего элемента
@@ -46,25 +53,42 @@ public class DynamicArray implements Dynamic {
     // Удаление элемента по индексу
     @Override
     public void removeAt(int index) {
-
+        for (int i = index; i < size; i++) {
+            array[i] = array[i + 1];
+        }
+        size--;
     }
 
     // Увеличивает размер массива. Вызывается когда нужно добавить элемент на позицию, больше, чем размер массива
     private void growSize(int index) {
         capacity *= 2;
+        int[] tempArr = new int[capacity];
 
         if (index == -1) {
-            // copy
+            for (int i = 0; i < size; i++) {
+                tempArr[i] = array[i];
+            }
         } else {
-            // copy from 0 to index - 1
-            // then copy from index to size - 1 at [index + 1, size]
+            for (int i = 0; i < size; i++) {
+                int pos = i < index ? i : i + 1;
+                tempArr[pos] = array[i];
+            }
         }
+
+        array = tempArr;
     }
 
     // Уменьшает размер массива до количества элементов
     @Override
     public void shrinkSize() {
+        capacity = size;
+        int[] tempArr = new int[capacity];
 
+        for (int i = 0; i < size; i++) {
+            tempArr[i] = array[i];
+        }
+
+        array = tempArr;
     }
 
     // Записывает новое значение в массив по индексу
@@ -97,4 +121,6 @@ public class DynamicArray implements Dynamic {
     // Проверяет, является ли массив пустым
     @Override
     public boolean isEmpty() { return size == 0; }
+
+    public void print() { System.out.println(Arrays.toString(array)); }
 }
