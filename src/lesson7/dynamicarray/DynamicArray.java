@@ -51,6 +51,8 @@ public class DynamicArray implements Dynamic {
 
     // Увеличивает размер массива. Вызывается когда нужно добавить элемент на позицию, больше, чем размер массива
     private void growSize(int index) {
+        capacity *= 2;
+
         if (index == -1) {
             // copy
         } else {
