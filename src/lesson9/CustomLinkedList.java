@@ -1,6 +1,8 @@
 package lesson9;
 
-public class CustomLinkedList implements CustomList {
+import java.util.Iterator;
+
+public class CustomLinkedList implements CustomList, Iterable<Integer> {
 
     private Node head;
     private Node tail;
@@ -90,7 +92,9 @@ public class CustomLinkedList implements CustomList {
 
     @Override
     public void clear() {
-
+        head = null;
+        tail = null;
+        size = 0;
     }
 
     @Override
@@ -98,6 +102,12 @@ public class CustomLinkedList implements CustomList {
 
     @Override
     public boolean contains(int data) {
+        for (Integer integer : this) {
+            if (integer == data) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -106,7 +116,16 @@ public class CustomLinkedList implements CustomList {
 
     @Override
     public void print() {
-        //Вывод в консоль значений в формате [1, 2, 3, 4, 5, 6]
+        StringBuilder str = new StringBuilder("[");
+
+        int count = 0;
+        for (Integer i : this) {
+            str.append(count == 0 ? i : "," + i);
+            count++;
+        }
+
+        str.append("]");
+        System.out.println(str);
     }
 
     private Node getElement(int index) {
@@ -125,6 +144,10 @@ public class CustomLinkedList implements CustomList {
         }
 
         return currentNode;
+    }
+
+    public Iterator<Integer> iterator() {
+        return new CustomListIterator(head);
     }
 
     private static class Node {
@@ -155,6 +178,28 @@ public class CustomLinkedList implements CustomList {
 
         public void setNext(Node next) {
             this.next = next;
+        }
+    }
+
+    private static class CustomListIterator implements Iterator<Integer> {
+
+        Node current;
+
+        public CustomListIterator(Node head) {
+            current = new Node(0, head);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current.getNext() != null;
+        }
+
+        @Override
+        public Integer next() {
+            int returnValue = current.getNext().getValue();
+            current = current.getNext();
+
+            return returnValue;
         }
     }
 }
